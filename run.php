@@ -34,7 +34,16 @@ function doExec($cmdTh, $cmdTd)
 
 $runFile  = $_GET['file'] ?? 'index.php';
 $fullName = __DIR__ . '/' . $runFile;
-$output = '<a href="/">BACK</a><br><br>' . PHP_EOL;
+$output = <<<EOT
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>PHP-CL Core: PHP 8 for Developers</title>
+</head>
+<body>
+EOT;
+$output .= '<a href="/">BACK</a><br><br>' . PHP_EOL;
 $contents = [];
 if (file_exists($fullName)) {
     $output .= '<table width="100%" style="border: thin solid black;">' . PHP_EOL;
@@ -53,8 +62,9 @@ if (file_exists($fullName)) {
     $output .= '</table>' . PHP_EOL;
     $output .= '</td>' . PHP_EOL;
     $output .= '</tr></table>' . PHP_EOL;
+    $output .= '</body></html>' . PHP_EOL;
 } else {
-    header('Location: ' . BASE_DIR);
+    header('Location: /');
     exit;
 }
 echo $output;

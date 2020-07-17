@@ -84,14 +84,25 @@ cd /path/to/repo/$FORK
 php vendor/bin/linuxforcomposer.phar docker:run deploy
 ```
 2. Return to your LfPHP Cloud Services account plan _Dashboard_
-3. Wait until the _Status_ button goes green.
+3. Wait until the _Status_ button goes green.  **WARNING:** this could take around 15 minutes to complete because PHP 8 needs to be compiled!!!
 4. Click on the link _Website View_
 
-## Access Information
-Here is some information on the sample database:
+## Usage Information
+Sample database:
 * Database Name: `phpcl`
 * Database User: `phpcl`
 * Database Password: `password`
-
-Otherwise you can also view the database through the LfPHP Cloud Services _Dashboard_.
-
+* Otherwise you can also view the database through the LfPHP Cloud Services _Dashboard_.
+Refreshing source code:
+* Edit or create the target file from your local repository
+* Push the changes to github adding a comment `$COMMENT`
+```
+cd /path/to/repo/$FORK
+git add *
+git commit -m '$COMMENT'
+git push
+```
+* From the main page of the website click on the link `Refresh Source Code`
+File system access:
+1. Return to your LfPHP Cloud Services account plan _Dashboard_
+2. Click on the link _Website View_
