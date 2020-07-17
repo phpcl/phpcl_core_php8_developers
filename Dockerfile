@@ -19,16 +19,17 @@ RUN \
 	echo "Restoring database from backup ..." && \
 	mysql -uroot -e "SOURCE /srv/repo/sample_data/phpcl.sql;" phpcl
 RUN \
-	echo "Compiling PHP 8 ..." && \
-	echo "TO DO"
+	echo "Setting up Apache ..." && \
+	mv -fv /srv/www /srv/www.OLD && \
+	ln -sfv /srv/repo /srv/www && \
+	echo "ServerName phpcl_core_php8" >> /etc/httpd/httpd.conf && \
+	chown apache:apache /srv/www && \
+	chown -R apache:apache /srv/repo && \
+	chmod -R 775 /srv/repo
 RUN \
-  echo "Setting up Apache ..." && \
-  cd /srv && \
-  mv -f -v /srv/www /srv/www.OLD && \
-  ln -s -f -v /srv/phpcl_core_php8 /srv/www && \
-  echo "ServerName phpcl_core_php8" >> /etc/httpd/httpd.conf && \
-  chown apache:apache /srv/www && \
-  chown -R apache:apache /srv/phpcl_core_php8 && \
-  chmod -R 775 /srv/phpcl_core_php8
+	echo "Compiling PHP 8 ..." && \
+	cp /bin/lfphp-compile /bin/lfphp-compile-php8 && \
+	sed -i 's/--prefix=\/usr/--prefix=\/usr\/local --with-ffi/g' /bin/lfphp-compile-php8 && \
+	/bin/lfphp-compile-php8
 ENTRYPOINT ["/bin/lfphp"]
 CMD ["--mysql", "--phpfpm", "--apache"]

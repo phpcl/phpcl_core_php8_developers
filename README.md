@@ -73,6 +73,7 @@ docker container ls
 docker exec -it $CONTAINER_ID /bin/bash -c "ifconfig"
 ```
 5. Test from your browser using this URL: `http://$CONTAINER_IP_ADDR/`
+  * Alternatively: `http://localhost:8888/`
 
 
 #### Deploy the Repo to LfPHP Cloud Services

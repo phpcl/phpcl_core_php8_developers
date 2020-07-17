@@ -1,30 +1,29 @@
 <?php
-// Directions:
-// 1. Start the docker container running PHP 7.4
-// 2. Start the docker container running PHP 7.3
-// 3. In this directory on your host computer run `php -S localhost:8888`
-define('REPO', 'phpcl_jumpstart_php_7_4');
-$remote = (strpos($_SERVER['REQUEST_URI'], REPO) !== FALSE);
-$exec   = ($remote) ? 'execRemote' : 'execDock';
-$path   = ($remote) ? REPO : '/';
-$output = '';
+define('REPO', '/srv/repo');
+$refresh = $_GET['refresh'] ?? 0;
 $list = glob(__DIR__ . '/*.php');
+$output = '';
+$message = '<a href="?refresh=1">Refresh Source Code</a><br>';
 foreach ($list as $file) {
     $name = basename($file);
     $output .= '<br><a href="run.php?file=' . $name . '">' . $name . '</a>' . PHP_EOL;
+}
+if ((bool) $refresh) {
+	chdir(REPO);
+	$message .= '<pre>' . shell_exec('git pull') . '</pre>' . PHP_EOL;
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PHP-CL JumpStart:PHP 7.4</title>
+    <title>PHP-CL Core: PHP 8 for Developers</title>
 </head>
 <body>
-    <h1>PHP-CL JumpStart:PHP 7.4</h1>
+    <h1>PHP-CL Core: PHP 8 for Developers</h1>
     <table>
         <tr>
-            <td><?= $output; ?></td>
-            <td><?php phpinfo(); ?></td>
+            <td width="33%"><?= $message; ?></td>
+            <td width="67%"><?= $output; ?></td>
         </tr>
     </table>
 </body>
