@@ -1,7 +1,6 @@
-FROM asclinux/linuxforphp-8.2-ultimate:7.1-nts
+FROM unlikelysource/phpcl_php7_php8
 MAINTAINER doug.bierer@etista.com
-RUN \
-    git clone "https://github.com/phpcl/phpcl_core_php8_developers.git" /srv/repo
+RUN git clone "https://github.com/phpcl/phpcl_core_php8_developers.git" /srv/repo
 RUN \
 	echo "Clearing out default database users ..." && \
 	/etc/init.d/mysql start && \
@@ -11,12 +10,12 @@ RUN \
 	mysql -uroot -v -e "DROP USER ''@'localhost';" && \
 	mysql -uroot -v -e "DROP USER 'root'@'devsrvmain';" && \
 	mysql -uroot -v -e "FLUSH PRIVILEGES;" && \
-	echo "Creating database and assigning permissions ..." && \
+	echo "Creating sample database and assigning permissions ..." && \
 	mysql -uroot -v -e "CREATE DATABASE phpcl;" && \
 	mysql -uroot -v -e "CREATE USER 'phpcl'@'localhost' IDENTIFIED BY 'password';" && \
 	mysql -uroot -v -e "GRANT ALL PRIVILEGES ON *.* TO 'phpcl'@'localhost';" && \
 	mysql -uroot -v -e "FLUSH PRIVILEGES;" && \
-	echo "Restoring database from backup ..." && \
+	echo "Restoring sample database ..." && \
 	mysql -uroot -e "SOURCE /srv/repo/sample_data/phpcl.sql;" phpcl
 RUN \
 	echo "Setting up Apache ..." && \
@@ -26,12 +25,5 @@ RUN \
 	chown apache:apache /srv/www && \
 	chown -R apache:apache /srv/repo && \
 	chmod -R 775 /srv/repo
-RUN \
-	echo "Compiling PHP 8 ..." && \
-	cp /bin/lfphp-compile /bin/lfphp-compile-php8 && \
-	sed -i 's/--prefix=\/usr/--prefix=\/usr\/local --with-ffi/g' /bin/lfphp-compile-php8 && \
-	/bin/lfphp-compile-php8 && \
-	ln -s /usr/bin/php /usr/bin/php7 && \
-	ln -s /usr/local/bin/php /usr/bin/php8
 CMD lfphp
 

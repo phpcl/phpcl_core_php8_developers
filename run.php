@@ -1,19 +1,19 @@
 <?php
-define('REPO', '/srv/repo');
+define('EXAMPLES', 'examples');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-function execPhp7($runFile)
+function execPhp7($fullName)
 {
     $cmdTh = 'php7 --version';
-    $cmdTd = 'php7 ' . REPO . '/' . $runFile;
+    $cmdTd = 'php7 ' . $fullName;
     return doExec($cmdTh, $cmdTd);
 }
 
-function execPhp8($runFile)
+function execPhp8($fullName)
 {
     $cmdTh = 'php8 --version';
-    $cmdTd = 'php8 ' . REPO . '/' . $runFile;
+    $cmdTd = 'php8 ' . $fullName;
     return doExec($cmdTh, $cmdTd);
 }
 
@@ -33,7 +33,7 @@ function doExec($cmdTh, $cmdTd)
 }
 
 $runFile  = $_GET['file'] ?? 'index.php';
-$fullName = __DIR__ . '/' . $runFile;
+$fullName = str_replace('//', '/', __DIR__ . '/' . EXAMPLES . '/' . $runFile);
 $output = <<<EOT
 <!DOCTYPE html>
 <html>
@@ -51,8 +51,8 @@ if (file_exists($fullName)) {
     $output .= highlight_file($fullName, TRUE);
     $output .= '</td>' . PHP_EOL;
     // run script using PHP 7 and then 8
-    $contents['php7'] = execPhp7($runFile);
-    $contents['php8'] = execPhp8($runFile);
+    $contents['php7'] = execPhp7($fullName);
+    $contents['php8'] = execPhp8($fullName);
     $output .= '<td style="width:50%;vertical-align:top;">' . PHP_EOL;
     $output .= '<table width="100%" height:"100%">' . PHP_EOL;
     $output .= '<tr>' . $contents['php7']['th'] . '</tr>' . PHP_EOL;
