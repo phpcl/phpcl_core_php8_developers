@@ -1,6 +1,6 @@
 <?php
 // constants
-define('EXAMPLES', 'examples');
+if (!defined('EXAMPLES')) define('EXAMPLES', 'examples');
 define('COLS', 4);
 // init vars
 $flag    = TRUE;

@@ -53,7 +53,9 @@ Be sure to save the file when done!
 #### Dockerfile
 Copy `Dockerfile.dist` to `Dockerfile`
 In the newly copied `Dockerfile` you need to change the github source to your own:
-* Change URL `"https://github.com/phpcl/phpcl_core_php8_developers.git"` to the URL `$FORK` you wrote down in an earlier step above.  
+* Change URL `"$FORK"` to the URL value represented by `$FORK` which you wrote down in an earlier step above.  
+* Change `$GITHUB_EMAIL` your github.com email address
+* Change `$GITHUB_NAME` to your github.com account name
 Don't forget to save the file when done!
 
 
