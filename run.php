@@ -1,5 +1,4 @@
 <?php
-define('EXAMPLES', 'examples');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -32,18 +31,9 @@ function doExec($cmdTh, $cmdTd)
     return ['th' => $th, 'td' => $td];
 }
 
-$runFile  = $_GET['file'] ?? 'index.php';
+$runFile  = (isset($_GET['file'])) ? basename($_GET['file']) : '';
 $fullName = str_replace('//', '/', __DIR__ . '/' . EXAMPLES . '/' . $runFile);
-$output = <<<EOT
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <title>PHP-CL Core: PHP 8 for Developers</title>
-</head>
-<body>
-EOT;
-$output .= '<a href="/">BACK</a><br><br>' . PHP_EOL;
+$output   = '';
 $contents = [];
 if (file_exists($fullName)) {
     $output .= '<table width="100%" style="border: thin solid black;">' . PHP_EOL;
@@ -63,9 +53,5 @@ if (file_exists($fullName)) {
     $output .= '</td>' . PHP_EOL;
     $output .= '</tr></table>' . PHP_EOL;
     $output .= '</body></html>' . PHP_EOL;
-} else {
-    header('Location: /');
-    exit;
 }
-echo $output;
-echo PHP_EOL;
+include __DIR__ . '/index.php';

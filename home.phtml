@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="The Linux for PHP Cloud Services. Pay less, deploy fast.">
+    <meta name="author" content="Foreach Code Factory">
+    <link rel="icon" href="https://php-cl.com/favicon.ico">
+    <link rel="apple-touch-icon" href="https://linuxforphp.com/apple-touch-icon.png">
+    <title>PHP-CL Core: PHP 8 for Developers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <!-- Core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/0.7.4/tailwind.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://linuxforphp.com/css/bootstrap.custom.hosting.css" rel="stylesheet">
+        <link href="https://linuxforphp.com/css/dashboard.css" rel="stylesheet">
+        <link href="https://linuxforphp.com/css/offcanvas.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.2/codemirror.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.2/theme/darcula.min.css" rel="stylesheet">
+    
+    <style>
+    /* Center the loader */
+    #se-pre-con,
+    #se-pre-con-deployment-status,
+    #se-pre-con-backup,
+    #se-pre-con-clear-backend-storage,
+    #se-pre-con-reset-backend-password,
+    #se-pre-con-formlambdasubmit {
+        /*position: absolute;*/
+        position: relative;
+        display: block;
+        z-index: 1;
+        width: 40px;
+        height: 40px;
+        margin: 5px 0 0 10px;
+        border: 2px solid #f3f3f3;
+        border-radius: 100%;
+        border-top: 2px solid #3498db;
+        -webkit-animation: spin 0.75s linear infinite;
+        animation: spin 0.75s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Add animation to "page content" */
+    .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+    }
+
+    @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 }
+        to { bottom:0px; opacity:1 }
+    }
+
+    @keyframes animatebottom {
+        from{ bottom:-100px; opacity:0 }
+        to{ bottom:0; opacity:1 }
+    }
+</style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://linuxforphp.com/js/html5shiv.min.js"></script>
+    <script src="https://linuxforphp.com/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-default fixed-top shadow-lg">
+        <div class="navbar-header">
+			<a class="navbar-brand" href="https://php-cl.com/index"><img src="https://php-cl.com/img/logo.svg" alt="Logo">PHP-CL Core: PHP 8 for Developers</a>
+		</div>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="/refresh.php">Refresh</a></li>
+			<form class="form-inline mt-2 mt-md-0" method="post" action="/search.php">
+			<input name="searchterm" class="form-control mr-sm-2 mac-style" type="text" placeholder="I am looking for..." aria-label="Search">
+			<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+			</form>
+        </div>
+    </nav>
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <main role="main" class="col-md-12 ml-sm-auto pt-3 px-4">
+            <div class="col-lg-12 col-md-offset-7 d-flex justify-content-center">
+                <div class="text-center">
+                    <noscript>You need to enable JavaScript to run this app.</noscript>
+                </div>
+            </div>
+			<div id="preroot"></div>
+            <div id="hosting_preroot"></div>
+            <div id="hosting_root" data-url="https://dougbiereretistacom3.linuxforphp.com" data-ip="74.208.120.101" data-status="unknown" data-oneclick="0" data-lasttime="0">
+                <div class="mt-5 bg-white rounded d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1>Code Examples</h1>
+				</div>
+				<?php if (!empty($message)) : ?>
+                <div class="mt-5 bg-white rounded d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <?= $message; ?>
+                </div>
+                <?php endif; ?>
+                <div class="mt-5 bg-white rounded d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+					<?= $output; ?>
+                </div>
+			</div>
+            <div id="hosting_postroot"></div>
+            <div id="postroot"></div>
+        </main>
+    </div>
+</div>
+
+    <!-- Core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://linuxforphp.com/js/holder.min.js"></script>
+    <script src="https://linuxforphp.com/js/lfphp.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<!-- <script>
+        var jq = $.noConflict();
+
+        var url = '/api/index';
+        jq( "#pageBody" ).load( url );
+
+        jq( document ).ajaxComplete( function() {
+            var obj = { Title: 'PHP-CL Core: PHP 8 for Developers', Url: "" };
+            history.pushState(obj, obj.Title, obj.Url);
+        });
+    </script> -->
+
+<!-- Icons https://feathericons.com -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+<!-- CodeMirror https://codemirror.net -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.2/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.2/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.2/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.2/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.2/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.2/mode/clike/clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.2/mode/php/php.min.js"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://linuxforphp.com/js/ie10-viewport-bug-workaround.js"></script>
+
+<script>
+    checkConnection();
+</script>
+
+</body>
+</html>

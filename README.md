@@ -35,20 +35,26 @@ php composer.phar update
 ```
 
 #### linuxforcomposer.json
-In the `linuxforcomposer.json` file supplied with the course, locate the `lfphp-cloud` key.  Replace the values of the following subkeys with the values you wrote down in the preceding steps:
+Copy the file `linuxforcomposer.json.dist` to `linuxforcomposer.json`
+In the newly copied `linuxforcomposer.json` file:
+* Locate the `lfphp-cloud` key  
+* Replace the values of the following subkeys with the values you wrote down in the preceding steps:
 ```
   /* other keys not shown */
   "lfphp-cloud" : {
-        "account": "$ACCOUNT",
-        "username": "$USER",
-        "token": "$TOKEN"
+        "account"  : "$ACCOUNT",
+        "username" : "$USER",
+        "token"    : "$TOKEN"
     }
 }
 ```
 Be sure to save the file when done!
 
 #### Dockerfile
-In the `Dockerfile` provided, you need to change the github source to your own. Change URL `"https://github.com/phpcl/phpcl_core_php8_developers.git"` in the `Dockerfile` to the URL `$FORK` you wrote down in an earlier step above.  Don't forget to save the file when done!
+Copy `Dockerfile.dist` to `Dockerfile`
+In the newly copied `Dockerfile` you need to change the github source to your own:
+* Change URL `"https://github.com/phpcl/phpcl_core_php8_developers.git"` to the URL `$FORK` you wrote down in an earlier step above.  
+Don't forget to save the file when done!
 
 
 #### Local Test
@@ -84,7 +90,7 @@ cd /path/to/repo/$FORK
 php vendor/bin/linuxforcomposer.phar docker:run deploy
 ```
 2. Return to your LfPHP Cloud Services account plan _Dashboard_
-3. Wait until the _Status_ button goes green.  **WARNING:** this could take around 15 minutes to complete because PHP 8 needs to be compiled!!!
+3. Wait until the _Status_ button goes green.  **WARNING:** this could take around a few minutes to complete because PHP 8 needs to be compiled!!!
 4. Click on the link _Website View_
 
 ## Usage Information
@@ -103,6 +109,4 @@ git commit -m '$COMMENT'
 git push
 ```
 * From the main page of the website click on the link `Refresh Source Code`
-File system access:
-1. Return to your LfPHP Cloud Services account plan _Dashboard_
-2. Click on the link _Website View_
+
