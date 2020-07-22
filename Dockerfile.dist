@@ -10,6 +10,7 @@ RUN \
 RUN \
     git clone "$FORK" /srv/repo && \
     cd /srv/repo && \
+    git checkout master && \
     git config user.email $GITHUB_EMAIL && \
     git config user.name  $GITHUB_NAME
 RUN \
