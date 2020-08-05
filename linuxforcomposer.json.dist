@@ -25,9 +25,9 @@
                 "port1": ["8888:80"]
             },
             "persist-data": {
-                "mount": "false",
-                "root-name": "",
-                "directories": {"directory1": ""}
+                "mount": "true",
+                "root-name": "/srv/tempo",
+                "directories": {"repo": "/repo"}
             }
         }
     },
