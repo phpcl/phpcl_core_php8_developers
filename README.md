@@ -12,7 +12,7 @@ Do the following online:
 
 ### From Linux for PHP Cloud Services
 Do the following online:
-1. Go to this website and write down your public-facing IP address: `https://ip2c.org`
+1. Go to the [`ip2c.org`](`https://ip2c.org`) website and write down your public-facing IP address
 2. Login to your LfPHP Cloud Services account
 3. Click on `Account` and then choose on one of your _Hosting Plans_ and click on `Details` for that plan
 4. Write down the account (immediately under _Status_ and just above _Website_) which we refer to as `$ACCOUNT` in this guide
