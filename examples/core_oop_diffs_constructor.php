@@ -1,6 +1,6 @@
 <?php
 class Test {
-	public $name = '';
+	public $name = 'Default';
 	public function test($name) {
 		$this->name = $name;
 	}
