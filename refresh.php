@@ -1,5 +1,5 @@
 <?php
-define('REPO', '/srv/repo');
+define('REPO', '/srv/tempo/repo');
 chdir(REPO);
 $message = 'Repo refresh status: <br>'
 		 . '<pre>' . shell_exec('git stash') . '</pre>' . PHP_EOL

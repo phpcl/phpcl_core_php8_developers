@@ -20,12 +20,21 @@ function execPhp8($fullName)
 function doExec($cmdTh, $cmdTd)
 {
     try {
-        $th = substr(shell_exec($cmdTh), 0, 9) . PHP_EOL;
-        $td = '<pre>' . shell_exec($cmdTd) . '</pre>' . PHP_EOL;
+        $th = substr(shell_exec($cmdTh), 0, 9);
+        $td = shell_exec($cmdTd);
     } catch (Throwable $t) {
         $td = get_class($t) . ':' . $t->getMessage();
     }
-    return ['th' => $th, 'td' => $td];
+    $escaped = htmlspecialchars($td);
+    return <<<EOT
+  <section id="contact">
+    <div class="container">
+		<div class="col-md-2"><h2>PHP $th Output</h2></div>
+		<div class="col-md-5"><b>Raw Output</b><br><pre>$td</pre></div>
+		<div class="col-md-5"><b>Escaped Output</b><br><pre>$escaped</pre></div>
+    </div>
+  </section>
+EOT;
 }
 
 $runFile  = (isset($_GET['file'])) ? basename($_GET['file']) : '';
@@ -33,34 +42,15 @@ $fullName = str_replace('//', '/', __DIR__ . '/' . EXAMPLES . '/' . $runFile);
 $output   = '';
 if (file_exists($fullName)) {
     $code = highlight_file($fullName, TRUE);
-    $php7 = execPhp7($fullName);
-    $php8 = execPhp8($fullName);
 	$output .= <<<EOT
-   <section id="services" class="bg-light">
+  <section id="services" class="bg-light">
     <div class="container">
 	  <h2>Executed File</h2>
 	  $code
     </div>
   </section>
 EOT;
-  $output .= <<<EOT
-  <section id="contact">
-    <div class="container">
-	  <h2>PHP 7 Output</h2>
-	  <b>Version: {$php7['th']}</b><br>
-	  {$php7['td']}
-    </div>
-  </section>
-EOT;
-	$output .= <<<EOT
-   <section id="services" class="bg-light">
-    <div class="container">
-	  <h2>PHP 8 Output</h2>
-	  <b>Version: {$php8['th']}</b><br>
-	  {$php8['td']}
-    </div>
-  </section>
-EOT;
-
+	$output .= execPhp7($fullName);
+	$output .= execPhp8($fullName);
 }
 include __DIR__ . '/index.php';
