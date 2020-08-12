@@ -1,8 +1,8 @@
 <?php
 // constants
 if (!defined('EXAMPLES')) define('EXAMPLES', 'examples');
-define('COLS', 4);
-define('FORMAT', '<div class="col-md-3"><a href="run.php?file=%s">%s</a></div>' . PHP_EOL);
+define('COLS', 3);
+define('FORMAT', '<div class="col-md-4"><a href="run.php?file=%s">%s</a></div>' . PHP_EOL);
 // init vars
 $flag = TRUE;
 $list = [];

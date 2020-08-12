@@ -30,7 +30,7 @@ function doExec($cmdTh, $cmdTd)
   <section id="contact">
     <div class="container">
 		<div class="row">
-		<div class="col-md-2"><b>PHP $th Output</b></div>
+		<div class="col-md-2"><b>$th</b></div>
 		<div class="col-md-5"><b>Raw Output</b><br><pre>$td</pre></div>
 		<div class="col-md-5"><b>Escaped Output</b><br><pre>$escaped</pre></div>
 		</div>
