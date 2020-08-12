@@ -47,7 +47,8 @@ EOT;
   <section id="contact">
     <div class="container">
 	  <h2>PHP 7 Output</h2>
-	  $php7
+	  <b>{$php7['th']}</b><br>
+	  {$php7['td']}
     </div>
   </section>
 EOT;
@@ -55,7 +56,8 @@ EOT;
    <section id="services" class="bg-light">
     <div class="container">
 	  <h2>PHP 8 Output</h2>
-	  $php8
+	  <b>{$php8['th']}</b><br>
+	  {$php8['td']}
     </div>
   </section>
 EOT;
