@@ -45,11 +45,22 @@
  <?php if ($examples) : ?>
  <section id="about">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto" style="float:left;">
-          <p><?= $examples; ?></p>
-        </div>
-      </div>
+		<?php 
+		while ($list->valid()) {
+			echo '<div class="row">' . PHP_EOL;
+			for ($x = 0; $x < COLS; $x++) {
+				if ($list->valid()) {
+					$name = basename($list->current());
+					$list->next();
+				} else {
+					$name = '&nbsp;';
+				}
+				printf(FORMAT, $name, $name);
+			}
+			echo '</div>' . PHP_EOL;
+		}
+		?>
+	  <p><?= $examples; ?></p>
     </div>
   </section>
   <?php endif; ?>
@@ -59,7 +70,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">Copyright &copy; <a href="https://php-cl.com/">php-cl.com</a> 2020</p>
     </div>
     <!-- /.container -->
   </footer>

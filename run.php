@@ -38,36 +38,24 @@ if (file_exists($fullName)) {
 	$output .= <<<EOT
    <section id="services" class="bg-light">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>Executed File</h2>
-          $code
-        </div>
-      </div>
+	  <h2>Executed File</h2>
+	  $code
     </div>
   </section>
 EOT;
   $output .= <<<EOT
   <section id="contact">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>PHP 7 Output</h2>
-          $php7
-        </div>
-      </div>
+	  <h2>PHP 7 Output</h2>
+	  $php7
     </div>
   </section>
 EOT;
 	$output .= <<<EOT
    <section id="services" class="bg-light">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>PHP 8 Output</h2>
-          $php8
-        </div>
-      </div>
+	  <h2>PHP 8 Output</h2>
+	  $php8
     </div>
   </section>
 EOT;
