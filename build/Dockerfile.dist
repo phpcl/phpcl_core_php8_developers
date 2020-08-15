@@ -8,11 +8,16 @@ RUN \
 	ln -s /usr/bin/php /usr/bin/php7 && \
 	ln -s /usr/local/bin/php /usr/bin/php8
 RUN \
+	echo "Enable display errors ..." && \
+	sed -i 's/display_errors = Off/display_errors = On/g' /etc/php.ini && \
+	sed -i 's/display_startup_errors = Off/display_startup_errors = On/g' /etc/php.ini
+RUN \
     git clone "$FORK" /srv/tempo/repo && \
     cd /srv/tempo/repo && \
     git checkout master && \
     git config user.email $GITHUB_EMAIL && \
-    git config user.name  $GITHUB_NAME
+    git config user.name  $GITHUB_NAME && \
+    git config core.fileMode false
 RUN \
 	echo "Creating sample database and assigning permissions ..." && \
 	/etc/init.d/mysql start && \
