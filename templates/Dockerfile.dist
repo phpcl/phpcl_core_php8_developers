@@ -12,11 +12,11 @@ RUN \
 	sed -i 's/display_errors = Off/display_errors = On/g' /etc/php.ini && \
 	sed -i 's/display_startup_errors = Off/display_startup_errors = On/g' /etc/php.ini
 RUN \
-    git clone "$FORK" /srv/tempo/repo && \
+    git clone "%%FORK%%" /srv/tempo/repo && \
     cd /srv/tempo/repo && \
     git checkout master && \
-    git config user.email $GITHUB_EMAIL && \
-    git config user.name  $GITHUB_NAME && \
+    git config user.email "%%GITHUB_EMAIL%%" && \
+    git config user.name  "%%GITHUB_NAME%%" && \
     git config core.fileMode false
 RUN \
 	echo "Creating sample database and assigning permissions ..." && \
@@ -27,7 +27,10 @@ RUN \
 	mysql -uroot -v -e "GRANT ALL PRIVILEGES ON *.* TO 'phpcl'@'localhost';" && \
 	mysql -uroot -v -e "FLUSH PRIVILEGES;" && \
 	echo "Restoring sample database ..." && \
-	mysql -uroot -e "SOURCE /srv/tempo/repo/sample_data/phpcl.sql;" phpcl
+	mysql -uroot -e "SOURCE /srv/tempo/repo/sample_data/phpcl.sql;" %%DB_NAME%%
+RUN \
+	echo "Installing phpMyAdmin ..." && \
+	lfphp-get phpmyadmin
 RUN \
 	echo "Setting up Apache ..." && \
 	mv -fv /srv/www /srv/www.OLD && \
@@ -37,4 +40,3 @@ RUN \
 	chown -R apache:apache /srv/tempo/repo && \
 	chmod -R 775 /srv/tempo/repo
 CMD lfphp --mysql --phpfpm --apache
-

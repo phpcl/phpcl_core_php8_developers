@@ -1,38 +1,55 @@
 <?php
 // constants
-define('SEC_CREDS', 'security_creds.json');
-define('TEMPLATE_DIR', __DIR__ . '/build');
-define('TEMPLATE_SUFFIX', '.dist');
+define('TEMPLATE_DIR', __DIR__ . '/templates');
+define('DEFAULT_SUFFIX', 'template');
 define('KEY_DELIM', '%%');
+define('SUFFIX',    '--suffix');
 define('NO_PROMPT', '--no-prompt');
+define('PWD_KEYS',  '--pwd-keys');
 
 // init vars
-$usage = 'Usage: php generate_creds.php <CREDS_JSON_FILE> <TEMPLATES_DIR> [<PWD_KEYS>] [' . NO_PROMPT . ']' . "\n"
-       . '       PWD_KEYS is a comma separated list of security_creds.json file keys that need a random key assigned' . "\n"
-       . '       if "--no-prompts" flag is present, will operate automatically without confirming values' . "\n"
-       . '       NOTES: (1) template files must have the extension ".template"' . "\n"
+$usage = 'Usage: php generate_creds.php <CREDS_JSON_FILE> <TEMPLATES_DIR> [' . SUFFIX . '="template"] [' . PWD_KEYS . '="xxx,yyy"] [' . NO_PROMPT . ']' . "\n"
+       . '       ' . SUFFIX . ' is the file extension used for template files' . "\n"
+       . '       ' . PWD_KEYS . ' is a comma separated list of security_creds.json file keys that need a random key assigned' . "\n"
+       . '       if the ' . NO_PROMPT . '" flag is present, will operate automatically without confirming values' . "\n"
+       . '       NOTES: (1) template suffix defaults to ".dist"' . "\n"
        . '              (2) keys inside template files must be ' 
        . KEY_DELIM . 'wrapped' . KEY_DELIM . ' with this delimiter:"' . KEY_DELIM . '"' . "\n";
 $creds = [];	// will write out to security_creds.json
 
 // access CLI params
+$allArgs  = implode(' ', $argv);
 $credFile = $argv[1] ?? SEC_CREDS;
 $templDir = $argv[2] ?? TEMPLATE_DIR;
-$pwdKeys  = $argv[3] ?? [];
 $keyDelim = KEY_DELIM;
-$noPrompt = (bool) strpos(implode(' ', $argv), NO_PROMPT);
+$noPrompt = (bool) strpos($allArgs, NO_PROMPT);
 
 // check for argv errors
 if (!$credFile) {
 	echo "You need to provide a security credentials JSON file\n";
 	exit($usage);
-}
-if (!file_exists($templDir)) {
+} elseif (!file_exists($templDir)) {
 	echo "Unable to find template files\n";
 	exit($usage);
 }
+
+// determine template suffix
+if (preg_match('/' . SUFFIX . '=(.*?)/', $allArgs, $matches)) {
+	$suffix = $matches[1] ?? DEFAULT_SUFFIX;
+	$suffix = trim($suffix, '"\'');
+	if (strpos($suffix, '.') === 0) {
+		$suffix .= substr($suffix, 1);
+	}
+}
+
+// determine password keys
+if (preg_match('/' . PWD_KEYS . '=(.*?)/', $allArgs, $matches)) {
+	$pwdKeys = $matches[1] ?? '';
+	$pwdKeys = trim($pwdKeys, '"\'');
+}
+
 foreach ($creds as $fn => $items) {
-	$template = str_replace('//', '/', $templDir . '/' . $fn . TEMPLATE_SUFFIX);
+	$template = str_replace('//', '/', $templDir . '/' . $fn . $suffix);
 	if (!file_exists($template)) {
 		echo "Unable to find $template\n";
 		exit($usage);

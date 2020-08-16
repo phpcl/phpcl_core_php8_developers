@@ -1,0 +1,12 @@
+{
+	"Dockerfile" : {
+		"FORK"         : "%%FORK%%",
+		"GITHUB_EMAIL" : "%%GITHUB_EMAIL%%",
+		"GITHUB_NAME"  : "%%GITHUB_NAME%%"
+	},
+	"linuxforcomposer.json" : {
+        "ACCOUNT" : "%%ACCOUNT%%",
+        "USER"    : "%%USER%%",
+        "TOKEN"   : "%%TOKEN%%"
+	}
+}
