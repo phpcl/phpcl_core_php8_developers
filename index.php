@@ -2,7 +2,7 @@
 // constants
 if (!defined('EXAMPLES')) define('EXAMPLES', 'examples');
 define('COLS', 3);
-define('FORMAT', '<td><a href="run.php?file=%s">%s</a></td>' . PHP_EOL);
+define('FORMAT', '<td style="margin-right: 20px;"><a href="run.php?file=%s">%s</a></td>' . PHP_EOL);
 // init vars
 $flag = TRUE;
 $list = [];
