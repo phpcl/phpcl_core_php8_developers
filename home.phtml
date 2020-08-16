@@ -53,6 +53,7 @@
 		<?php 
 		while ($list->valid()) {
 			echo '<tr>' . PHP_EOL;
+			$check = COLS - 1;
 			for ($x = 0; $x < COLS; $x++) {
 				if ($list->valid()) {
 					$name = basename($list->current());
@@ -61,6 +62,7 @@
 					$name = '&nbsp;';
 				}
 				printf(FORMAT, $name, $name);
+				echo ($x < $check) ? (SPACER) : '';
 			}
 			echo '</tr>' . PHP_EOL;
 		}
