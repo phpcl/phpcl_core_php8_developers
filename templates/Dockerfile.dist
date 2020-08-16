@@ -5,8 +5,8 @@ RUN \
 	cp /bin/lfphp-compile /bin/lfphp-compile-php8 && \
 	sed -i 's/--prefix=\/usr/--prefix=\/usr\/local --with-ffi/g' /bin/lfphp-compile-php8 && \
 	/bin/lfphp-compile-php8 && \
-	ln -s /usr/bin/php /usr/bin/php7 && \
-	ln -s /usr/local/bin/php /usr/bin/php8
+	ln -sfv /usr/bin/php /usr/bin/php7 && \
+	ln -sfv /usr/local/bin/php /usr/bin/php8
 RUN \
 	echo "Enable display errors ..." && \
 	sed -i 's/display_errors = Off/display_errors = On/g' /etc/php.ini && \
@@ -27,7 +27,7 @@ RUN \
 	mysql -uroot -v -e "GRANT ALL PRIVILEGES ON *.* TO 'phpcl'@'localhost';" && \
 	mysql -uroot -v -e "FLUSH PRIVILEGES;" && \
 	echo "Restoring sample database ..." && \
-	mysql -uroot -e "SOURCE /srv/tempo/repo/sample_data/phpcl.sql;" %%DB_NAME%%
+	mysql -uroot -e "SOURCE /srv/tempo/repo/sample_data/phpcl.sql;" phpcl
 RUN \
 	echo "Installing phpMyAdmin ..." && \
 	lfphp-get phpmyadmin

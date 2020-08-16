@@ -59,7 +59,7 @@ cp templates/creds.json.dist ./creds.json`
 * Run the Linux for Composer Tools command to generate the two config files:
 ```
 cd /path/to/repo
-vendor/bin/lfc-tools creds creds.json templates/ --suffix=dist 
+vendor/bin/phpcl-lfc-tools creds creds.json templates/ --suffix=dist 
 ```
 
 #### Manually
@@ -107,7 +107,7 @@ php vendor/bin/linuxforcomposer.phar docker:run start
   * Or, alternatively, using the Linux for Composer Tools:
 ```
 cd /path/to/repo/%%FORK%%
-php vendor/bin/lfc-tools start
+php vendor/bin/phpcl-lfc-tools start
 ```
 
 3. Find the container ID (which we refer to as `%%CONTAINER_ID%%` in this guide):

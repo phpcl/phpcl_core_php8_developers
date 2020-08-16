@@ -6,22 +6,43 @@ define('KEY_DELIM', '%%');
 define('SUFFIX',    '--suffix');
 define('NO_PROMPT', '--no-prompt');
 define('PWD_KEYS',  '--pwd-keys');
+define('OUTPUT_BAR', str_repeat('*', 40) . "\n");
 
 // init vars
 $usage = 'Usage: php generate_creds.php <CREDS_JSON_FILE> <TEMPLATES_DIR> [' . SUFFIX . '="template"] [' . PWD_KEYS . '="xxx,yyy"] [' . NO_PROMPT . ']' . "\n"
        . '       ' . SUFFIX . ' is the file extension used for template files' . "\n"
-       . '       ' . PWD_KEYS . ' is a comma separated list of security_creds.json file keys that need a random key assigned' . "\n"
+       . '       ' . PWD_KEYS . ' is a comma separated list of "creds.json" file keys that need a random key assigned' . "\n"
        . '       if the ' . NO_PROMPT . '" flag is present, will operate automatically without confirming values' . "\n"
-       . '       NOTES: (1) template suffix defaults to ".dist"' . "\n"
+       . '       NOTES: (1) template suffix defaults to "template"' . "\n"
        . '              (2) keys inside template files must be ' 
        . KEY_DELIM . 'wrapped' . KEY_DELIM . ' with this delimiter:"' . KEY_DELIM . '"' . "\n";
 $creds = [];	// will write out to security_creds.json
 
+function getValueFromArgv($search)
+{
+	global $argv;
+	$flag = FALSE;
+	$value = NULL;
+	foreach ($argv as $item) {
+		if (strpos($item, $search) !== FALSE) {
+			[$flag, $value] = explode('=', $item);
+			break;
+		}
+	}
+	if ($flag) {
+		$value = trim($value, '\'" ');
+	}
+	return $value;
+}
+
 // access CLI params
 $allArgs  = implode(' ', $argv);
-$credFile = $argv[1] ?? SEC_CREDS;
-$templDir = $argv[2] ?? TEMPLATE_DIR;
+$credFile = $argv[1] ?? '';
+$templDir = $argv[2] ?? '';
+$files    = [];
 $keyDelim = KEY_DELIM;
+$pwdKeys  = getValueFromArgv(PWD_KEYS) ?? '';
+$suffix   = getValueFromArgv(SUFFIX) ?? DEFAULT_SUFFIX;
 $noPrompt = (bool) strpos($allArgs, NO_PROMPT);
 
 // check for argv errors
@@ -33,35 +54,24 @@ if (!$credFile) {
 	exit($usage);
 }
 
-// determine template suffix
-if (preg_match('/' . SUFFIX . '=(.*?)/', $allArgs, $matches)) {
-	$suffix = $matches[1] ?? DEFAULT_SUFFIX;
-	$suffix = trim($suffix, '"\'');
-	if (strpos($suffix, '.') === 0) {
-		$suffix .= substr($suffix, 1);
-	}
-}
-
-// determine password keys
-if (preg_match('/' . PWD_KEYS . '=(.*?)/', $allArgs, $matches)) {
-	$pwdKeys = $matches[1] ?? '';
-	$pwdKeys = trim($pwdKeys, '"\'');
-}
-
-foreach ($creds as $fn => $items) {
-	$template = str_replace('//', '/', $templDir . '/' . $fn . $suffix);
-	if (!file_exists($template)) {
-		echo "Unable to find $template\n";
-		exit($usage);
-	}
-}
-
 // read security creds JSON file contents
 try {
 	$creds = json_decode(file_get_contents($credFile), TRUE, 512, JSON_THROW_ON_ERROR);
 } catch (Throwable $t) {
 	echo get_class($t) . ':' . $t->getMessage() . "\n";
 	exit($usage);
+}
+
+// extracting template contents
+foreach ($creds as $fn => $items) {
+	$template = str_replace(['//','..'], ['/','.'], $templDir . '/' . $fn . '.' . $suffix);
+	if (!file_exists($template)) {
+		echo "Unable to find $template\n";
+		exit($usage);
+	} else {
+		echo "Reading $template ...\n";
+		$files[$fn] = file_get_contents($template);
+	}
 }
 
 // generate new passwords if that key is present
@@ -76,7 +86,9 @@ if ($pwdKeys) {
 // confirm cred info
 if (!$noPrompt) {
 	foreach ($creds as $fn => $items) {
+		echo OUTPUT_BAR;
 		echo "Confirming Creds for $fn\n";
+		echo OUTPUT_BAR;
 		foreach ($items as $key => $value) {
 			$prompt = $key . ' [' . $value . "] : \n";
 			$temp = readline($prompt);
@@ -86,11 +98,12 @@ if (!$noPrompt) {
 }
 
 // write out changes to other files
+reset($creds);
 foreach ($creds as $fn => $items) {
-	echo "\n****************************************\n";
-	echo "Processing $fn\n";
-	$template = str_replace('//', '/', $templDir . '/' . $fn . TEMPLATE_SUFFIX);
-	$contents = file_get_contents($template);
+	echo OUTPUT_BAR;
+	echo "Processing $fn ...\n";
+	echo OUTPUT_BAR;
+	$contents = $files[$fn];
 	foreach($items as $key => $value) {
 		// generate password if requested
 		if (isset($pwdKeys[$key])) {
@@ -108,5 +121,7 @@ foreach ($creds as $fn => $items) {
 $backFn = str_replace('.','_',$credFile) . '_' . date('YmdHis') . '.bak';
 copy($credFile, $backFn);
 file_put_contents($credFile, json_encode($creds, JSON_PRETTY_PRINT));
-echo "\nSecurity Credentials File:\n";
+echo OUTPUT_BAR;
+echo "Security Credentials File:\n";
+echo OUTPUT_BAR;
 readfile($credFile);

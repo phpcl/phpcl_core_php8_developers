@@ -46,9 +46,10 @@
  <section id="about">
     <div class="container">
 		<?= ($message) ? $message : ''; ?>
+		<table>
 		<?php 
 		while ($list->valid()) {
-			echo '<div class="row">' . PHP_EOL;
+			echo '<tr>' . PHP_EOL;
 			for ($x = 0; $x < COLS; $x++) {
 				if ($list->valid()) {
 					$name = basename($list->current());
@@ -58,9 +59,10 @@
 				}
 				printf(FORMAT, $name, $name);
 			}
-			echo '</div>' . PHP_EOL;
+			echo '</tr>' . PHP_EOL;
 		}
 		?>
+		</table>
     </div>
   </section>
   <?php endif; ?>
