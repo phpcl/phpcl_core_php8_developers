@@ -30,9 +30,11 @@ function doExec($cmdTh, $cmdTd)
   <section id="contact">
     <div class="container">
 		<div class="row">
-		<div class="col-md-2"><b>$th</b></div>
-		<div class="col-md-5"><b>Raw Output</b><br><pre>$td</pre></div>
-		<div class="col-md-5"><b>Escaped Output</b><br><pre>$escaped</pre></div>
+		<div class="col-md-12" style="background-color:#E5E5E5;"><b>$th</b></div>
+		</div>
+		<div class="row">
+		<div class="col-md-6"><b>Raw Output</b><br><pre>$td</pre></div>
+		<div class="col-md-6"><b>Escaped Output</b><br><pre>$escaped</pre></div>
 		</div>
     </div>
   </section>
