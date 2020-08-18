@@ -41,11 +41,23 @@ function doExec($cmdTh, $cmdTd)
 EOT;
 }
 
+function fileWithLineNumbers($fullName)
+{
+	$output = '';
+    $code = highlight_file($fullName, TRUE);
+    $contents = explode('<br />', $code);
+    foreach ($contents as $index => $line) {
+		$output .= '<span style="color:gray;">' . $index + 1 . '</span>';
+		$output .= '   ' . $line;
+	}
+	return $output;
+}
+
 $runFile  = (isset($_GET['file'])) ? basename($_GET['file']) : '';
 $fullName = str_replace('//', '/', __DIR__ . '/' . EXAMPLES . '/' . $runFile);
 $output   = '';
 if (file_exists($fullName)) {
-    $code = highlight_file($fullName, TRUE);
+    $code = fileWithLineNumbers($fullName);
 	$output .= <<<EOT
   <section id="services" class="bg-light">
     <div class="container">
