@@ -46,10 +46,9 @@ function fileWithLineNumbers($fullName)
 	$output = '';
     $code = highlight_file($fullName, TRUE);
     $contents = explode('<br />', $code);
-    foreach ($contents as $index => $line) {
-		$output .= '<span style="color:gray;">' . $index + 1 . '</span>';
-		$output .= '   ' . $line;
-	}
+    $pattern = '<span style="color:gray;">%02d</span>   %s<br />';
+    foreach ($contents as $index => $line)
+		$output .= sprintf($pattern, $index + 1, $line);
 	return $output;
 }
 
