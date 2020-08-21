@@ -1,7 +1,7 @@
 <?php
 // core_cool_starts_with.php
-$search = '/';
-$string = '/path/to/some/directory';
+$search = '//';
+$string = '//path/to/some/directory';
 
 // traditional approach:
 $result = (substr($string, 0, strlen($search)) === $search);
