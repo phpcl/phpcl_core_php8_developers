@@ -1,10 +1,10 @@
 <?php
 // core_oop_trait_ambiguous.php
 trait Test1 {
-	public function test() { return 'TEST1'; }
+	public function test() { return '111111'; }
 }
 trait Test2 {
-	public function test() { return 'TEST2'; }
+	public function test() { return '222222'; }
 }
 class PhpCL {
 	use Test1, Test2 { test as otherTest; }
