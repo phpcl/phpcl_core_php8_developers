@@ -1,5 +1,5 @@
 <?php
-// core_procedural_number_to_string.php
+// core_proc_num_to_str.php
 $value = 0;
 $string = 'ABC';
 $mixed  = '42abc';
