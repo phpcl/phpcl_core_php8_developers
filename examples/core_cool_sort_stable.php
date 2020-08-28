@@ -1,59 +1,44 @@
 <?php
 // core_cool_sort_stable.php
-$makeTrek = function ($fname, $lname, $rank, $ship) {
-	return new class($fname, $lname, $rank, $ship) {
-		public $fname = '';
-		public $lname = '';
-		public $rank  = '';
-		public $ship  = '';
-		public function __construct($fname, $lname, $rank, $ship)
-		{
-			$this->fname = $fname;
-			$this->lname = $lname;
-			$this->rank  = $rank;
-			$this->ship  = $ship;
+class Test
+{
+	public $id;
+	public $name;
+}
+function showArr($arr)
+{
+	$out  = "\n";
+	$cols = 4;
+	$iter = new ArrayIterator($arr);
+	$patt = '%6s | %03d ' . PHP_EOL;
+	$out .= sprintf('%6s | %3s ', 'Name', 'ID') . PHP_EOL;
+	$out .= sprintf('%6s | %3s ', '------', '---') . PHP_EOL;
+	while ($iter->valid()) {
+		for ($x = 0; $x < $cols; $x++) {
+			$obj = $iter->current();
+			$out .= sprintf($patt, $obj->name, $obj->id);
+			$iter->next();
+			if (!$iter->valid()) break;
 		}
-		public function getArray()
-		{
-			return get_object_vars($this);
-		}
-	};
-};
-$star_trek = [
-	$makeTrek('Jim','Kirk','Captain','Enterprise'),
-	$makeTrek('Jim','Kirk','Admiral','Enterprise'),
-	$makeTrek('Julian','Bashir','Lieutenant','Deep Space 9'),
-	$makeTrek('Michael','Burnham','Commander','Discovery'),
-	$makeTrek('Christine','Chapel','Head Nurse','Enterprise'),
-	$makeTrek('Pavel','Chekov','Ensign','Enterprise'),
-	$makeTrek('Kathryn','Janeway','Captain','Voyager'),
-	$makeTrek('McCoy','Leonard','Chief Medical Officer','Enterprise'),
-	$makeTrek('Janice','Rand','Yeoman','Enterprise'),
-	$makeTrek('William','Riker','Commander','Enterprise'),
-	$makeTrek('Seven of','Nine','Civilian','Voyager',),
-	$makeTrek('Mister','Spock','Commander','Enterprise'),
-	$makeTrek('Tasha','Yar','Lieutenant','Enterprise'),
-	$makeTrek('Montgomery','Scott','Chief Engineer','Enterprise'),
-];
-$sortByShip = function ($obj1, $obj2) {
-	return $obj1->ship <=> $obj2->ship;
-};
-$sortByShipAndLast = function ($obj1, $obj2) {
-	return $obj1->ship <=> $obj2->ship
-		   ?: $obj1->lname <=> $obj2->lname;
-};
-$output = function ($star_trek) {
-	$pattern = '%12s | %12s | %22s | %12s' . PHP_EOL;
-	$twelve  = '------------';
-	$line    = sprintf($pattern, $twelve, $twelve, str_repeat('-', 22), $twelve);
-	printf($pattern, 'First', 'Last', 'Rank', 'Ship');
-	echo $line;
-	foreach ($star_trek as $obj)
-		vprintf($pattern, $obj->getArray());
-	echo $line;
-};
-usort($star_trek, $sortByShip);
-$output($star_trek);
-usort($star_trek, $sortByShipAndLast);
-$output($star_trek);
+	}
+	return $out;
+}
+		
+// build array
+$arr = [];
+$names = ['Andrew', 'Doug', 'Cal', 'James'];
+$max = 20;
+for ($x = 0; $x < $max; $x++) {
+	$test = new Test();
+	// note that the ID value == the order assigned
+	$test->id = sprintf('%04d', $x);
+	$test->name = $names[array_rand($names)];
+	$arr[] = $test;
+}
+usort($arr, function ($a, $b) { return $a->name <=> $b->name; });
+// In PHP 7 the ID values are all over the place
+// In PHP 8 the IDs respect the original order assigned
+echo "\nSorted by Name\n";
+echo showArr($arr);
+			
 	
