@@ -1,12 +1,9 @@
 <?php
 // core_proc_disabled_func.php
 /*
- * To demonstrate, from the command line, disable the "password_hash()" function:
-   utils/disable.sh password_hash --disable
- * Run the program:
-   php8 core_proc_disabled_func.php
- * Re-enable "password_hash()":
-   utils/disable.sh --enable
+ * To demonstrate, first run "disable_password_hash.php"
+ * Run the program
+ * Re-enable by running "enable_password_hash.php"
  */
 
 function password_hash($password, $algo)
