@@ -1,11 +1,11 @@
 <?php
 // core_proc_disabled_func.php
 /*
- * To demonstrate, first run "disable_password_hash.php"
- * Run the program
- * Re-enable by running "enable_password_hash.php"
+ * To Demonstrate:
+ * Click on the "-Disable Func" option, main menu to disable "password_hash()"
+ * Run this program
+ * Click on the "+PHP.INI" option, main menu (restores php.ini)
  */
-
 function password_hash($password, $algo)
 {
 	$new_pwd = '';
