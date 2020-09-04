@@ -1,5 +1,5 @@
 <?php
-// core_error_warn2err_1.php
+// core_error_obj.php
 include __DIR__ . '/includes/try_catch_test.php';
 
 // accessing a property of a non-object

@@ -1,5 +1,5 @@
 <?php
-// core_error_warn2err_1.php
+// core_error_array.php
 include __DIR__ . '/includes/try_catch_test.php';
 
 // going off the deep end of an array
