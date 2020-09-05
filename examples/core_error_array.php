@@ -8,12 +8,6 @@ echo test(function () {
 	$a[] = 'Off the deep end';
 	return var_export($a, TRUE); });
 
-// abusing `foreach()`
-echo test(function () {
-	$output = '';
-	foreach (999 as $char) $output .= $char;
-	return $output; });
-
 // bad array key
 echo test(function () {
 	$obj = new stdClass();

@@ -24,19 +24,7 @@ function doExec($cmdTh, $cmdTd)
         $td = get_class($t) . ':' . $t->getMessage();
     }
     $escaped = htmlspecialchars($td);
-    return <<<EOT
-  <section id="contact">
-    <div class="container">
-		<div class="row">
-		<div class="col-md-12" style="background-color:#E5E5E5;"><b>$th</b></div>
-		</div>
-		<div class="row">
-		<div class="col-md-6"><b>Raw Output</b><br><pre>$td</pre></div>
-		<div class="col-md-6"><b>Escaped Output</b><br><pre>$escaped</pre></div>
-		</div>
-    </div>
-  </section>
-EOT;
+    return ['th' => $th, 'td' => $td, 'esc' => $escaped];
 }
 
 function fileWithLineNumbers($fullName)
@@ -63,7 +51,36 @@ if (file_exists($fullName)) {
     </div>
   </section>
 EOT;
-	$output .= execPhp7($fullName);
-	$output .= execPhp8($fullName);
+	$php7 = execPhp7($fullName);
+	$php8 = execPhp8($fullName);
+    $output .= <<<EOT
+  <section id="contact">
+    <div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h2>{$php7['th']}</h2>
+				<br><h2>Raw Output</h2><br>
+				<pre>{$php7['td']}</pre><br>
+			</div>
+			<div class="col-md-6">
+				<h2>{$php8['th']}</h2>
+				<br><b>Raw Output</b><br>
+				<pre>{$php8['td']}</pre><br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<b>Escaped Output</b><br>
+				<pre>{$php7['esc']}</pre>
+			</div>
+			<div class="col-md-6">
+				<b>Escaped Output</b><br>
+				<pre>{$php8['esc']}</pre>
+			</div>
+		</div>
+    </div>
+  </section>
+
+EOT;
 }
 include __DIR__ . '/index.php';
