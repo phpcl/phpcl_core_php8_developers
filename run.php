@@ -59,7 +59,7 @@ EOT;
 		<div class="row">
 			<div class="col-md-6">
 				<h2>{$php7['th']}</h2>
-				<br><h2>Raw Output</h2><br>
+				<br><b>Raw Output</h2></b>
 				<pre>{$php7['td']}</pre><br>
 			</div>
 			<div class="col-md-6">
