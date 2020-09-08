@@ -1,0 +1,12 @@
+<produce>
+	<fruit>
+		<item qty="11" unit="box">Apple</item>
+		<item qty="22" unit="bunch">Banana</item>
+		<item qty="33" unit="tray">Cherry</item>
+	</fruit>
+	<vegetable>
+		<item qty="44" unit="box">Artichoke</item>
+		<item qty="55" unit="box">Broccoli</item>
+		<item qty="66" unit="sack">Cabbage</item>
+	</vegetable>
+</produce>

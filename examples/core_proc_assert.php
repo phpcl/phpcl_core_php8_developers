@@ -2,9 +2,9 @@
 // core_proc_assert.php
 /*
  * To Demonstrate:
- * Click on the "+Assert" option, main menu
+ * Click on the "php.ini::+Assert" option, main menu
  * Run this program
- * Click on the "+PHP.INI" option, main menu (restores php.ini)
+ * Click on the "php.ini::+PHP.INI" option, main menu (restores php.ini)
  */
 error_reporting(E_ALL);
 $a = 22;
