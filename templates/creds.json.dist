@@ -2,7 +2,8 @@
 	"Dockerfile" : {
 		"FORK"         : "%%FORK%%",
 		"GITHUB_EMAIL" : "%%GITHUB_EMAIL%%",
-		"GITHUB_NAME"  : "%%GITHUB_NAME%%"
+		"GITHUB_NAME"  : "%%GITHUB_NAME%%",
+        "PHP_VERS"     : "8.0.0beta3"
 	},
 	"linuxforcomposer.json" : {
         "ACCOUNT" : "%%ACCOUNT%%",
