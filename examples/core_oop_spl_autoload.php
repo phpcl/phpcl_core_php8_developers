@@ -1,5 +1,5 @@
 <?php
-// core_spl_magic_autoload.php
+// core_oop_spl_autoload.php
 function __autoload($class)
 {
 	$fn = __DIR__ . '/src/'

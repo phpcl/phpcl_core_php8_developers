@@ -1,5 +1,5 @@
 <?php
-// core_spl_dbl_linked_list.php
+// core_oop_spl_dbl_linked.php
 function iterateList($double)
 {
 	$double->rewind();

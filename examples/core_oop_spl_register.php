@@ -1,5 +1,5 @@
 <?php
-// core_spl_autoload_register.php
+// core_oop_spl_register.php
 $autoload = new class () {
 	// should be:
 	// public function __invoke($class)

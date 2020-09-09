@@ -1,5 +1,5 @@
 <?php
-// core_spl_heap.php
+// core_oop_spl_heap.php
 $heap = new class () extends SplHeap {
     public function compare(array $arr1, array $arr2) : int {
 		$cmp1 = array_values($arr1)[0];
