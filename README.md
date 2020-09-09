@@ -7,8 +7,8 @@ Do the following online:
 1. Create github.com account (if not already)
 2. From github.com fork this repo: [https://github.com/phpcl/phpcl_core_php8_developers](https://github.com/phpcl/phpcl_core_php8_developers) into your own github account
 3. Go to your github.com account page
-4. Locate the forked repo (which we refer to as `%%FORK%%`) in this guide
-5. Click on the `Code` button and copy the clone URL
+4. Locate the forked repo 
+5. Click on the `Code` button and copy the clone URL, referred to as `%%FORK%%` in this guide
 
 ### From Linux for PHP Cloud Services
 Do the following online:
@@ -27,11 +27,11 @@ Do the following online:
 ```
 git clone %%FORK%% /path/to/repo/%%FORK%%
 ```
-3. Install the Linux for Composer Tools
+3. Install Linux for Composer
 ```
 cd /path/to/repo/%%FORK%%
 php composer.phar self-update
-php composer.phar require phpcl/lfc-tools
+php composer.phar install
 ```
 
 ### Update Deployment Files
@@ -57,9 +57,15 @@ cp templates/creds.json.dist ./creds.json`
 | %%USER%% | ... your Linux for PHP Cloud Services login name (email address) |
 | %%TOKEN%% | ... your Linux for PHP Cloud Services access token |
 * Run the Linux for Composer Tools command to generate the two config files:
+  * Commands if you're running on Linux:
 ```
 cd /path/to/repo
-vendor/bin/phpcl-lfc-tools creds creds.json templates/ --suffix=dist 
+./lfc.sh creds creds.json templates/ --suffix=dist --no-prompt
+```
+  * Commands if you're running on Windows:
+```
+cd \path\to\repo
+lfc.bat creds creds.json templates\ --suffix=dist --no-prompt 
 ```
 
 #### Manually
@@ -99,15 +105,15 @@ If you want to test locally before deployment, proceed as follows:
     * Ubuntu/Debian: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
     * Fedora/CentOS/RedHat: [https://docs.docker.com/engine/install/fedora/](https://docs.docker.com/engine/install/fedora/)
 2. Use Linux for Composer to start the container locally:
-  * Using Linux for Composer Directly:
+  * From a Linux command prompt:
 ```
 cd /path/to/repo/%%FORK%%
-php vendor/bin/linuxforcomposer.phar docker:run start
+./lfc.sh start
 ```
-  * Or, alternatively, using the Linux for Composer Tools:
+  * From a Windows command prompt:
 ```
-cd /path/to/repo/%%FORK%%
-php vendor/bin/phpcl-lfc-tools start
+cd \path\to\repo\%%FORK%%
+lfc.bat start
 ```
 
 3. Find the container ID (which we refer to as `%%CONTAINER_ID%%` in this guide):
@@ -125,9 +131,15 @@ docker exec -it %%CONTAINER_ID%% /bin/bash -c "ifconfig"
 #### Deploy the Repo to LfPHP Cloud Services
 You are now ready to deploy to your LfPHP Cloud Services account.  Proceed as follows:
 1. Use Linux for Composer to deploy:
+    * From a Linux command prompt:
 ```
 cd /path/to/repo/%%FORK%%
-php vendor/bin/linuxforcomposer.phar docker:run deploy
+./lfc.sh deploy
+```
+    * From a Windows command prompt:
+```
+cd \path\to\repo\%%FORK%%
+lfc.bat deploy
 ```
 2. Return to your LfPHP Cloud Services account plan _Dashboard_
 3. Wait until the _Status_ button goes green.  **WARNING:** this could take around a few minutes to complete because PHP 8 needs to be compiled!!!

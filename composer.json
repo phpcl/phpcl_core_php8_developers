@@ -1,6 +1,6 @@
 {
     "require": {
-        "linuxforphp/linuxforcomposer": "^2.0"
+        "linuxforphp/linuxforcomposer": "*"
     },
     "scripts": {
         "pre-update-cmd": [
