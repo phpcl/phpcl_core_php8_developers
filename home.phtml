@@ -90,26 +90,36 @@
     </div>
   </header>
 
- <?php if ($list) : ?>
+ <?php if ($filt) : ?>
  <section id="about">
     <div class="container">
 		<?= ($message) ? $message : ''; ?>
 		<table>
 		<?php 
-		while ($list->valid()) {
-			echo '<tr>' . PHP_EOL;
-			$check = COLS - 1;
-			for ($x = 0; $x < COLS; $x++) {
-				if ($list->valid()) {
-					$name = basename($list->current());
-					$list->next();
-				} else {
-					$name = '&nbsp;';
+		// organize into categories
+		foreach ($categories as $key => $label) {
+			echo '<tr>'
+				 . '<th colspan=' . (COLS + 2) . ' style="background-color:#F2F2F2;">' 
+				 . $label 
+				 . '</th>'
+				 . '</tr>' . PHP_EOL;
+			$filt->cat = $key;
+			$filt->rewind();
+			while ($filt->valid()) {
+				echo '<tr>' . PHP_EOL;
+				$check = COLS - 1;
+				for ($x = 0; $x < COLS; $x++) {
+					if ($filt->valid()) {
+						$name = basename($filt->current());
+						$filt->next();
+					} else {
+						$name = '&nbsp;';
+					}
+					printf(FORMAT, $name, $name);
+					echo ($x < $check) ? (SPACER) : '';
 				}
-				printf(FORMAT, $name, $name);
-				echo ($x < $check) ? (SPACER) : '';
+				echo '</tr>' . PHP_EOL;
 			}
-			echo '</tr>' . PHP_EOL;
 		}
 		?>
 		</table>

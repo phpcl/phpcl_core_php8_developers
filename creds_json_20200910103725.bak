@@ -1,0 +1,13 @@
+{
+    "Dockerfile": {
+        "FORK": "https:\/\/github.com\/phpcl\/phpcl_core_php8_developers",
+        "GITHUB_EMAIL": "doug@unlikelysource.com",
+        "GITHUB_NAME": "dbierer",
+        "PHP_VERS": "8.0.0beta3"
+    },
+    "linuxforcomposer.json": {
+        "ACCOUNT": "dougbiereretistacom3",
+        "USER": "doug.bierer@etista.com",
+        "TOKEN": "7c589af74b61f2083857171501a41bcbdb02ccb4c61bc239a29401a3eeecc1a2"
+    }
+}
