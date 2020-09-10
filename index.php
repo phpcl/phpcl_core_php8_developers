@@ -28,7 +28,8 @@ if (empty($output)) {
 		public function accept() : bool
 		{
 			$fn = parent::current();
-			return (strpos($fn, $this->cat));
+			$key = '_' . $this->cat . '_';
+			return (strpos($fn, $key));
 		}
 	};
 }
