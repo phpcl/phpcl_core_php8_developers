@@ -1,5 +1,6 @@
 <?php
 // core_cool_attr_old.php
+// TODO: get this working
 namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 /**

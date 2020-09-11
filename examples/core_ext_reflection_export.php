@@ -10,7 +10,11 @@ class Test
 $test = new Test();
 $test->id = 999;
 $test->name = 'Andrew';
-echo $test->name . '[' . $test->id . ']';
-echo "\n";
+
+// this works in both PHP 7 and 8
 $reflect = new ReflectionObject($test);
+echo $reflect . "\n";
+
+// this doesn't work in PHP 8
 ReflectionClass::export($reflect);
+

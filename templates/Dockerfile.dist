@@ -10,6 +10,18 @@ RUN \
 	ln -sfv /usr/bin/php /usr/bin/php7 && \
 	ln -sfv /usr/local/bin/php /usr/bin/php8
 RUN \
+    git clone "%%FORK%%" /srv/tempo/repo && \
+    cd /srv/tempo/repo && \
+    git checkout master && \
+    git config user.email "%%GITHUB_EMAIL%%" && \
+    git config user.name  "%%GITHUB_NAME%%" && \
+    git config core.fileMode false
+RUN \
+	echo "Configuring SQLite and sample database ..." && \
+    echo "TODO: install SQLite PHP ext ..." && \
+    cp -v /srv/tempo/repo/sample_data/phpcl.db /tmp/phpcl.db && \
+    chown apache:apache /tmp/*
+RUN \
 	echo "Enable display errors and configure php.ini for modifications later ..." && \
 	sed -i 's/display_errors = Off/display_errors = On/g' /etc/php.ini && \
 	sed -i 's/display_startup_errors = Off/display_startup_errors = On/g' /etc/php.ini && \
@@ -18,13 +30,6 @@ RUN \
 	cp /etc/php.ini /tmp/php.ini && \
 	chown apache:apache /etc/php.ini &&  \
 	chmod 664 /etc/php.ini
-RUN \
-    git clone "%%FORK%%" /srv/tempo/repo && \
-    cd /srv/tempo/repo && \
-    git checkout master && \
-    git config user.email "%%GITHUB_EMAIL%%" && \
-    git config user.name  "%%GITHUB_NAME%%" && \
-    git config core.fileMode false
 RUN \
 	echo "Creating sample database and assigning permissions ..." && \
 	/etc/init.d/mysql start && \
