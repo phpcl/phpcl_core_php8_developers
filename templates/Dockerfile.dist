@@ -4,7 +4,7 @@ RUN \
 	echo "Compiling PHP 8 ..." && \
 	cp /bin/lfphp-compile /bin/lfphp-compile-php8 && \
 	sed -i 's/8.0.0dev/%%PHP_VERS%%/g' /bin/lfphp-compile-php8 && \
-	sed -i 's/--prefix=\/usr/--prefix=\/usr\/local --with-ffi/g' /bin/lfphp-compile-php8 && \
+	sed -i 's/--prefix=\/usr/--prefix=\/usr\/local --with-ffi --with-zip/g' /bin/lfphp-compile-php8 && \
 	sed -i 's/git clone https:\/\/github.com\/php\/php-src/git clone https:\/\/github.com\/php\/php-src --branch php-%%PHP_VERS%% \/root\/php-src/g' /bin/lfphp-compile-php8 && \
 	/bin/lfphp-compile-php8 && \
 	ln -sfv /usr/bin/php /usr/bin/php7 && \

@@ -14,4 +14,5 @@ $blk = imagecolorallocate($img, 0xFF, 0xFF, 0xFF);
 imagefttext($img, 32, 45, 85, 166, $blk, $fnt, $txt);
 imagepng($img, fopen($new, 'w'));
 $tag = '<img src="/examples/includes/test.png" />';
-echo '</pre>' . $tag . '<pre>';
+$msg = var_export(gd_info());
+echo '</pre>' . $tag . '<pre>' . $msg;
