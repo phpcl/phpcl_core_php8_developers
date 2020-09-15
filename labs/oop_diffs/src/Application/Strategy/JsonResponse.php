@@ -1,14 +1,22 @@
 <?php
-namespace Application\Strategy;
+namespace Application\ Strategy;
 class JsonResponse
 {
-	public function jsonresponse($data = []) 
+	use VersionTrait;
+	const VERSION = '1.0';
+	protected $internal = [];
+	public function __set($key, $value) 
 	{
-		$this->data = $data;
+		$this->internal[$key] = $value;
 	}
-	public function render()
+	public function __get($key) : string
 	{
-		header('Content-Type: application/json');
-		return json_encode($this->data);
+		$json = $this->internal[$key] ?? [];
+		return json_encode($json);
+		
+	}
+	public function version() : string
+	{
+		return self::VERSION;
 	}
 }
