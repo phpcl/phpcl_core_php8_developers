@@ -11,10 +11,11 @@ $filt = NULL;
 $path = str_replace('//', '/', __DIR__ . '/' . EXAMPLES);
 $categories = [
 	'cool' => 'Cool Stuff',
+	'imp'  => 'Improvements',
 	'oop'  => 'OOP PHP',
 	'proc' => 'Procedural PHP',
 	'ext'  => 'PHP Extensions',
-	'error' => 'Error Handling'
+	'error' => 'Error Handling',
 ];
 // output file list
 if (empty($message)) $message = '';
