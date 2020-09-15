@@ -16,6 +16,7 @@ $categories = [
 	'proc' => 'Procedural PHP',
 	'ext'  => 'PHP Extensions',
 	'error' => 'Error Handling',
+	'labs' => 'Labs',
 ];
 // output file list
 if (empty($message)) $message = '';
