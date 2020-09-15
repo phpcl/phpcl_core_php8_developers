@@ -1,6 +1,6 @@
 <?php
 // core_proc_parse_str.php
-$url  = 'http://php-cl.com/courses?a=Person&b==Woman&c=Man&d=Camera&e=TV';
+$url  = 'http://php-cl.com/courses?a=Person&b=Woman&c=Man&d=Camera&e=TV';
 $info = parse_url($url);
 // works in PHP 7 and 8
 $params = parse_str($info['query'], $result);
