@@ -1,16 +1,18 @@
 <?php
 // core_proc_numeric_strings.php
 $test = ['111', '  111', '111  ', '111doug'];
-foreach ($test as $numStr) 
-	var_dump((int) $numStr);
 function test(float $i) { 
-	return var_export($i, TRUE);
+	return var_export($i, TRUE) . "\n";
 }
-foreach ($test as $numStr) {
-	test($numStr);
-	echo "\n";
+try {
+	foreach ($test as $numStr) test($numStr);
+} catch (Throwable $t) {
+	echo $t;
 }
-foreach ($test as $numStr) {
-	var_dump(111 + $numStr);
-	echo "\n";
+
+try {
+    foreach ($test as $numStr)
+		var_dump(111 + $numStr, TRUE);
+} catch (Throwable $t) {
+	echo $t;
 }
