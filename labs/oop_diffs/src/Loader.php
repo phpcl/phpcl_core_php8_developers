@@ -1,13 +1,16 @@
 <?php
 class Loader
 {
+	protected $dir = '';
+	public function loader($dir)
+	{
+		$this->dir = $dir;
+	}
 	public function __invoke($class) 
 	{
-		$fn = SRC_DIR . '/'
+		$fn = $this->dir . '/'
 			. str_replace('\\', '/', $class)
 			. '.php';		
 		require_once $fn;
 	}
 }
-$loader = new Loader();
-spl_autoload_register($loader);
