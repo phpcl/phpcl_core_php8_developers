@@ -45,17 +45,18 @@ Use the Linux for Composer Tools to create the two config files as follows:
 * Copy the `/path/to/repo/templates/creds.json.dist`:
 ```
 cd /path/to/repo
-cp templates/creds.json.dist ./creds.json`
+cp templates/creds.json.dist ./creds.json
 ```
 * Modify `/path/to/repo/creds.json` as follows:
-| Replace ... | With ... |
-| ----------- | -------- |
-| %FORK%%     | ... the URL value represented by `%%FORK%%` which you wrote down in an earlier step above |
+
+| Replace ...      | With ... |
+| :--------------- | :------- |
+| %%FORK%%         | ... the URL value represented by `%%FORK%%` which you wrote down in an earlier step above |
 | %%GITHUB_EMAIL%% | ... your github.com email address |
-| %%GITHUB_NAME%% | ... your github.com account name |
-| %%ACCOUNT%% | ... your Linux for PHP Cloud Services account name (all lowercase) |
-| %%USER%% | ... your Linux for PHP Cloud Services login name (email address) |
-| %%TOKEN%% | ... your Linux for PHP Cloud Services access token |
+| %%GITHUB_NAME%%  | ... your github.com account name |
+| %%ACCOUNT%%      | ... your Linux for PHP Cloud Services account name (all lowercase) |
+| %%USER%%         | ... your Linux for PHP Cloud Services login name (email address) |
+| %%TOKEN%%        | ... your Linux for PHP Cloud Services access token |
 
 * Run the Linux for Composer Tools command to generate the two config files:
   * Commands if you're running on Linux:
