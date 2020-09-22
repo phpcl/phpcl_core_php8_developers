@@ -7,15 +7,7 @@ $data = [
 	'https://php-cl.com/courses?',
 	'https://php-cl.com/courses?#'
 ];
-var_dump(parse_url($data[0]));
-var_dump(parse_url($data[1]));
 foreach ($data as $url) {
 	echo "<b>$url</b>\n";
-	$parsed = parse_url($url);
-	if (!isset($parsed['query'])) {
-		echo "Query missing\n";
-	}
-	if (!isset($parsed['fragment'])) {
-		echo "Fragment missing\n";
-	}
+	var_dump(parse_url($url));
 }
