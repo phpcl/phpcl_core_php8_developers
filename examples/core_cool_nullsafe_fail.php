@@ -3,13 +3,18 @@
 // demonstrates short circuiting
 
 $arr1 = array_combine(range('A','F'), range(111,700,111));
-$arrobj = new ArrayObject($arr1);
-$anon = new class ($arr1) {
-	public $prop;
-	public function __construct($arr1)
-	{
-		$this->prop = new stdClass();
-		$this->prop->arr1 = $arr1;
-	}
+$arrObj = new ArrayObject($arr1);
+$arr2 = ['A' => $arrObj, 'B' => NULL];
+$anon = new class ($arr2) {
+        public $prop;
+        public function __construct($arr)
+        {
+                $this->prop = new stdClass();
+                $this->prop->arr = $arr;
+        }
 };
-$arr2 = [ $arr1, $arrobj, $anon ];
+$arr3 = ['anon' => $anon ];
+echo $arr3['anon']->prop->arr['A']['A'];
+echo "\n";
+echo $arr3['anon']?->prop->arr['B']['A'] ?? 'DEFAULT';
+echo "\n";
