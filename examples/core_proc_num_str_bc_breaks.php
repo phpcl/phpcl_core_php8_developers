@@ -3,8 +3,8 @@
 // using `is_numeric()` to validate form data
 $age = '77  ';
 echo (is_numeric($age)) 
-     ? "Age must be a number\n" 
-     : "Age is $age\n";
+     ? "Age is $age\n"
+     : "Age must be a number\n";
 
 // manipulating a number extracted from HTML
 $tag = '<div style="width:999px;">';
