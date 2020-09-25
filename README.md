@@ -1,4 +1,6 @@
 # PHP-CL Core: PHP 8 for Developers
+This repository is designed to provide examples for the _PHP 8 for PHP Developers_ course.
+For more information see [https://php-cl.com/courses/scheduled/20](https://php-cl.com/courses/scheduled/20)
 
 ## Day Zero Setup Procedure:
 
