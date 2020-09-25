@@ -10,12 +10,13 @@ $iter = NULL;
 $filt = NULL;
 $path = str_replace('//', '/', __DIR__ . '/' . EXAMPLES);
 $categories = [
-	'cool' => 'Cool Stuff',
-	'imp'  => 'Improvements',
 	'oop'  => 'OOP PHP',
 	'proc' => 'Procedural PHP',
 	'ext'  => 'PHP Extensions',
-	'error' => 'Error Handling',
+	'cool' => 'Cool Stuff',
+	'imp'  => 'Improvements',
+	'error'  => 'Error Handling',
+	'dep'  => 'Deprecations',
 	'lab' => 'Labs',
 ];
 // output file list
