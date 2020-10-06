@@ -36,7 +36,7 @@ function math_new($a, $b, $op)
 		'*' => $a * $b,
 		'/' => $a / $b,
 		'default' => 0
-	}
+	};
 }
 echo math_new(2, 2, '+');
 echo "\n";
