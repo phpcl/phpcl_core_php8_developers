@@ -64,9 +64,11 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="/index.php">Home</a>
           </li>
+          <?php if ($phpmyAdmin) : ?>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="/phpmyadmin">phpMyAdmin</a>
           </li>
+          <?php endif; ?>
           <li class="nav-item dropdown">
 			<a class="nav-link dropbtn" href="javascript:void(0)">php.ini</a>
 			<div class="dropdown-content">

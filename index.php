@@ -19,6 +19,7 @@ $categories = [
 	'dep'  => 'Deprecations',
 	'lab' => 'Labs',
 ];
+$phpMyAdmin = TRUE;
 // output file list
 if (empty($message)) $message = '';
 if (empty($output)) {
@@ -35,5 +36,13 @@ if (empty($output)) {
 			return (strpos($fn, $key));
 		}
 	};
+}
+// disable phpMyAdmin for demo site
+if (strpos($_SERVER['HTTP_HOST'], 'dougbiereretistacom3.linuxforphp.com')) {
+	$phpMyAdmin = FALSE;
+	if (stripos($_SERVER['REQUEST_URI'], 'phpmyadmin') !== FALSE) {
+		header('Location: /');
+		exit;
+	}
 }
 include __DIR__ . '/home.phtml';
