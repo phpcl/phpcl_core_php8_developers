@@ -9,8 +9,9 @@ $start = microtime(TRUE);
 $arr   = [];
 $alpha = range('A', 'Z');
 $beta  = $alpha;
-$loops = 10000;
-$iters = 2000;
+$loops = 10000;		// size of outer array
+$iters = 500;		// total iterations
+$drip  = 10;		// output every $drip times
 for ($x = 0; $x < $loops; $x++) {
 	foreach ($alpha as $left) {
 		foreach ($beta as $right) {
@@ -18,7 +19,6 @@ for ($x = 0; $x < $loops; $x++) {
 		}
 	}
 }
-$drip = 100;
 $max = count($arr);
 $pattern = '%10d : %s ' . PHP_EOL;
 echo "\nTotal Elements : " . number_format($max) . "\n";
