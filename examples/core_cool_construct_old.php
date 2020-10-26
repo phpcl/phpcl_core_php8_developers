@@ -1,5 +1,5 @@
 <?php
-// core_cool_attr_misc.php
+// core_cool_construct_old.php
 class Test
 {
 	public $id;
