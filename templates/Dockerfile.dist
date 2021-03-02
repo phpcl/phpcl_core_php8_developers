@@ -2,11 +2,13 @@ FROM asclinux/linuxforphp-8.2-ultimate:7.1-nts
 MAINTAINER doug.bierer@etista.com
 RUN \
 	echo "Compiling PHP 8 ..." && \
-	cp /bin/lfphp-compile /bin/lfphp-compile-php8 && \
-	sed -i 's/8.0.0dev/%%PHP_VERS%%/g' /bin/lfphp-compile-php8 && \
-	sed -i 's/--prefix=\/usr/--prefix=\/usr\/local --with-ffi --with-zip/g' /bin/lfphp-compile-php8 && \
-	sed -i 's/git clone https:\/\/github.com\/php\/php-src/git clone https:\/\/github.com\/php\/php-src --branch php-%%PHP_VERS%% \/root\/php-src/g' /bin/lfphp-compile-php8 && \
-	/bin/lfphp-compile-php8 && \
+	git clone https://github.com/php/php-src /root/php-src && \
+	cd /root/php-src && \
+	git checkout php-8.0.2 && \
+	./buildconf --force && \
+	./configure   --prefix=/usr/local --sysconfdir=/etc  --localstatedir=/var  --datadir=/usr/share/php  --mandir=/usr/share/man  --enable-fpm  --with-fpm-user=apache  --with-fpm-group=apache  --with-config-file-path=/etc  --with-zlib  --enable-bcmath  --with-bz2  --enable-calendar  --enable-dba=shared  --with-gdbm  --with-gmp  --enable-ftp  --with-gettext=/usr  --enable-mbstring  --enable-pcntl  --with-pspell  --with-readline  --with-snmp  --with-mysql-sock=/run/mysqld/mysqld.sock  --with-curl  --with-openssl  --with-openssl-dir=/usr  --with-mhash  --enable-intl  --with-libdir=/lib64  --enable-sockets  --with-libxml  --enable-soap  --enable-gd  --with-jpeg  --with-freetype  --enable-exif  --with-xsl  --with-pgsql  --with-pdo-mysql=/usr  --with-pdo-pgsql  --with-mysqli  --with-pdo-dblib  --with-ldap  --with-ldap-sasl  --enable-shmop  --enable-sysvsem  --enable-sysvshm  --enable-sysvmsg  --with-tidy  --with-expat  --with-enchant  --with-imap=/usr/local/imap-2007f  --with-imap-ssl=/usr/include/openssl  --with-kerberos=/usr/include/krb5  --with-sodium=/usr  --with-zip  --enable-opcache  --with-pear  --with-ffi && \
+	make && \
+	make install && \
 	ln -sfv /usr/bin/php /usr/bin/php7 && \
 	ln -sfv /usr/local/bin/php /usr/bin/php8
 RUN \
