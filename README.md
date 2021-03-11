@@ -70,3 +70,14 @@ Sample database:
 * slide: s/be ZipArchive **class** (not extension)
 * Slide: Static Return Type
   * SQL **INSERT** statement
+* Example lacking ";": `core_imp_deref_str.php`
+* Slide: Illegal Sort Functions
+  * Code block, "illegal" callback should have ">"
+  * "<=>" is legal!
+* `core_ext_tokenizer.php`
+  * Not working
+* `core_ext_datetime_zone.php`
+  * Appears not to recognize the `ST` timezone
+* Slide: Deprecations: Enchant
+  * Needs formatting improvement
+  
