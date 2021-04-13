@@ -2,9 +2,9 @@
 // core_oop_spl_heap.php
 $heap = new class () extends SplHeap {
     public function compare(array $arr1, array $arr2) : int {
-		$cmp1 = array_values($arr1)[0];
-		$cmp2 = array_values($arr2)[0];
-		return $cmp1 <=> $cmp2;
+        $cmp1 = array_values($arr1)[0];
+        $cmp2 = array_values($arr2)[0];
+        return $cmp1 <=> $cmp2;
     }
 };
 
@@ -29,11 +29,11 @@ echo str_repeat('-', 44) . "\n";
 printf("%20s\t%20s\n", 'Name', 'Net Worth');
 echo str_repeat('-', 44) . "\n";
 while ($heap->valid()) {
-	$iter = new ArrayIterator($heap->current());
-	printf("%20s\t%20s\n", $iter->key(), number_format($iter->current()));
-	$total += (int) $iter->current();
-	$heap->next();
+    $iter = new ArrayIterator($heap->current());
+    printf("%20s\t%20s\n", $iter->key(), number_format($iter->current()));
+    $total += (int) $iter->current();
+    $heap->next();
 }
 echo str_repeat('-', 44) . "\n";
-	printf("%20s\t%20s\n", '', number_format($total));
+        printf("%20s\t%20s\n", '', number_format($total));
 echo str_repeat('-', 44) . "\n";

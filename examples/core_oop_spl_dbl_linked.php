@@ -1,29 +1,30 @@
 <?php
 // core_oop_spl_dbl_linked.php
-function iterateList($double)
+$double = new class () extends SplDoublyLinkedList
 {
-	$double->rewind();
-	while ($item = $double->current()) {
-		echo $item . '. ';
-		$double->next();
-	}
-}
+    public function iterateList(int $mode)
+    {
+        $this->setIteratorMode($mode);
+        $this->rewind();
+        while ($item = $this->current()) {
+            echo $item . '. ';
+            $this->next();
+        }
+    }
+};
 
 $error = 'ERROR: unable to build linked list';
 $item = ['Person', 'Woman', 'Man', 'Camera', 'TV'];
-$double = new SplDoublyLinkedList();
-$forward = SplDoublyLinkedList::IT_MODE_FIFO | SplDoublyLinkedList::IT_MODE_KEEP;
-$reverse = SplDoublyLinkedList::IT_MODE_LIFO | SplDoublyLinkedList::IT_MODE_KEEP;
 try {
-	foreach ($item as $key => $value)
-		if (!$double->push($value))
-			throw new Exception($error);
-	echo "********** Forwards ***********\n";
-	$double->setIteratorMode($forward);
-	iterateList($double);
-	echo "\n********** Backwards **********\n";
-	$double->setIteratorMode($reverse);
-	iterateList($double);
+    foreach ($item as $key => $value)
+        if (!$double->push($value))
+            throw new Exception($error);
+    echo "********** Forwards ***********\n";
+    $forward = SplDoublyLinkedList::IT_MODE_FIFO | SplDoublyLinkedList::IT_MODE_KEEP;
+    $double->iterateList($forward);
+    echo "\n********** Backwards **********\n";
+    $reverse = SplDoublyLinkedList::IT_MODE_LIFO | SplDoublyLinkedList::IT_MODE_KEEP;
+    $double->iterateList($reverse);
 } catch (Throwable $t) {
-	echo $t;
+    echo $t;
 }
