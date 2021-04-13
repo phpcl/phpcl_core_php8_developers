@@ -53,3 +53,31 @@ Sample database:
 * Database Access via phpMyAdmin:
   * PHP 7: `http://localhost:7777/phpmyadmin`
   * PHP 8: `http://localhost:8888/phpmyadmin`
+
+
+## ERRATA
+* Slide: Database Extension Gotchas
+  * Switch refs for `MySQLi` and `PgSQL`
+* Slide: GD Extension Gotchas
+  * the `--with-png-dir=DIR` option has been removed
+  * need `libpng`
+* http://localhost:8888/run.php?file=core_ext_reflection_signature.php
+  * results are identical in 7 and 8: ???
+* The example that uses mb_??? and accepts an ASCII code point
+  * results are identical in 7 and 8: ???
+* Slide: Zip/ZipArchive Extension Gotchas
+  * S/be the following **methods** have been added (not functions!)
+* slide: s/be ZipArchive **class** (not extension)
+* Slide: Static Return Type
+  * SQL **INSERT** statement
+* Example lacking ";": `core_imp_deref_str.php`
+* Slide: Illegal Sort Functions
+  * Code block, "illegal" callback should have ">"
+  * "<=>" is legal!
+* `core_ext_tokenizer.php`
+  * Not working
+* `core_ext_datetime_zone.php`
+  * Appears not to recognize the `ST` timezone
+* Slide: Deprecations: Enchant
+  * Needs formatting improvement
+  
